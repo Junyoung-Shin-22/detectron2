@@ -283,8 +283,8 @@ class ShowAction(InferenceAction):
         data = extractor(outputs)
         image_vis = visualizer.visualize(image, data)
         entry_idx = context["entry_idx"] + 1
-        out_fname = './image-densepose/' + image_fpath.split('/')[-1]
-        out_dir = os.path.dirname(out_fname)
+        out_dir = context['out_fname']
+        out_fname = os.path.join(out_dir, os.path.basename(image_fpath))
         if len(out_dir) > 0 and not os.path.exists(out_dir):
             os.makedirs(out_dir)
         cv2.imwrite(out_fname, image_vis)
